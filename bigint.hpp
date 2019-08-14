@@ -85,7 +85,7 @@ struct BigInt {
 
 	friend BigInt operator+(BigInt const &lhs, BigInt const &rhs) {
 		if (lhs.neg == rhs.neg)
-			return (lhs.Capacity() < rhs.Capacity()) ? UAdd(rhs, lhs) : UAdd(lhs, rhs);
+			return (lhs.Size() < rhs.Size()) ? UAdd(rhs, lhs) : UAdd(lhs, rhs);
 		return USub(lhs, rhs);
 	}
 	friend BigInt operator+(BigInt &&lhs, BigInt &&rhs) {
@@ -98,7 +98,7 @@ struct BigInt {
 
 	friend BigInt operator-(BigInt const &lhs, BigInt const &rhs) {
 		if (lhs.neg == rhs.neg) return USub(lhs, rhs);
-		return (lhs.Capacity() < rhs.Capacity()) ? UAdd(rhs, lhs) : UAdd(lhs, rhs);
+		return (lhs.Size() < rhs.Size()) ? UAdd(rhs, lhs) : UAdd(lhs, rhs);
 	}
 	friend BigInt operator-(BigInt &&lhs, BigInt &&rhs) { return move(lhs) + (-move(rhs)); }
 	friend BigInt operator-(BigInt &&lhs, BigInt const &rhs) { return move(lhs -= rhs); }
